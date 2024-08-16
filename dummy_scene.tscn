@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://dbjbvg5qkdwa3"]
+[gd_scene load_steps=3 format=3 uid="uid://dbjbvg5qkdwa3"]
 
 [ext_resource type="PackedScene" uid="uid://dlbme2uvym6ce" path="res://screens/pause_menu.tscn" id="1_5eebt"]
+[ext_resource type="PackedScene" uid="uid://dd1ow35lkxmgb" path="res://entities/state_machine_example/state_machine_example.tscn" id="2_6vqfn"]
 
 [node name="DummyScene" type="Node2D"]
 
@@ -8,3 +9,5 @@
 visible = false
 offset_right = 320.0
 offset_bottom = 180.0
+
+[node name="StateMachineExample" parent="." instance=ExtResource("2_6vqfn")]

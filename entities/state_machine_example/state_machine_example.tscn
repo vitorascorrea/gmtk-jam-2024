@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://dd1ow35lkxmgb"]
+
+[ext_resource type="Script" path="res://helpers/state_machine.gd" id="1_qvtgj"]
+[ext_resource type="Script" path="res://entities/state_machine_example/red_state.gd" id="2_n18f3"]
+[ext_resource type="Script" path="res://entities/state_machine_example/blue_state.gd" id="3_83ecg"]
+
+[node name="StateMachineExample" type="Node2D"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = 139.0
+offset_top = 63.0
+offset_right = 179.0
+offset_bottom = 103.0
+
+[node name="StateMachine" type="Node" parent="ColorRect" node_paths=PackedStringArray("starting_state")]
+script = ExtResource("1_qvtgj")
+starting_state = NodePath("RedState")
+
+[node name="RedState" type="Node" parent="ColorRect/StateMachine" node_paths=PackedStringArray("color_rect", "blue_state")]
+script = ExtResource("2_n18f3")
+color_rect = NodePath("../..")
+blue_state = NodePath("../BlueState")
+
+[node name="BlueState" type="Node" parent="ColorRect/StateMachine" node_paths=PackedStringArray("color_rect", "red_state")]
+script = ExtResource("3_83ecg")
+color_rect = NodePath("../..")
+red_state = NodePath("../RedState")
