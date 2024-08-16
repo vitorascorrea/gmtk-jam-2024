@@ -5,7 +5,7 @@ class_name RedState extends State
 
 
 func enter():
-	color_rect.color = Color.RED
+	color_rect.color = Color.DARK_RED
 
 
 func update(delta: float) -> void:	
