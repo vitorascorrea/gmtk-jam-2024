@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://bfcy3187c3vdi"]
+
+[ext_resource type="Script" path="res://entities/scale_one_colliders/scale_one_collider.gd" id="1_sjxqk"]
+[ext_resource type="Texture2D" uid="uid://bl7gmjb6n7qks" path="res://assets/colliders.png" id="2_52yia"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q3o1x"]
+size = Vector2(4, 4)
+
+[node name="ScaleOneCollider" type="Area2D"]
+script = ExtResource("1_sjxqk")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(2.98023e-07, 2.98023e-07)
+scale = Vector2(0.2, 0.2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_q3o1x")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_52yia")
+hframes = 32
+vframes = 32

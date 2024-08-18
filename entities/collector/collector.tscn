@@ -1,19 +1,17 @@
 [gd_scene load_steps=4 format=3 uid="uid://clv0rat1xmide"]
 
 [ext_resource type="Script" path="res://entities/collector/collector.gd" id="1_qrkxm"]
-[ext_resource type="PackedScene" uid="uid://bfcy3187c3vdi" path="res://entities/pixels/pixel.tscn" id="2_fxrmy"]
+[ext_resource type="PackedScene" uid="uid://bfcy3187c3vdi" path="res://entities/scale_one_colliders/scale_one_collider.tscn" id="2_fxrmy"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_brl0i"]
-radius = 2.0
+radius = 2.54951
 
 [node name="Collector" type="Area2D"]
 script = ExtResource("1_qrkxm")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0.5, 0.5)
 shape = SubResource("CircleShape2D_brl0i")
 
-[node name="InitialPixel" parent="." instance=ExtResource("2_fxrmy")]
-modulate = Color(1, 1, 1, 1)
+[node name="Core" parent="." instance=ExtResource("2_fxrmy")]
 
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="tree_exited" from="Core" to="." method="_on_initial_pixel_tree_exited"]

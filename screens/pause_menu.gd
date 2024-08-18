@@ -15,7 +15,7 @@ func set_label_message(message: String):
 
 
 func trigger():
-	if activable:
+	if activable and is_instance_valid(get_tree()):
 		get_tree().paused = true
 		visible = true
 
