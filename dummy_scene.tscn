@@ -1,27 +1,32 @@
-[gd_scene load_steps=5 format=3 uid="uid://dbjbvg5qkdwa3"]
+[gd_scene load_steps=4 format=3 uid="uid://dbjbvg5qkdwa3"]
 
 [ext_resource type="PackedScene" uid="uid://dlbme2uvym6ce" path="res://screens/pause_menu.tscn" id="1_5eebt"]
-[ext_resource type="PackedScene" uid="uid://dd1ow35lkxmgb" path="res://entities/state_machine_example/state_machine_example.tscn" id="2_6vqfn"]
-[ext_resource type="PackedScene" uid="uid://cvxirxbkcx8lk" path="res://entities/platformer_hero_example/platformer_hero_example.tscn" id="3_d5efm"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_b3pvx"]
-size = Vector2(381, 20)
+[ext_resource type="Script" path="res://dummy_scene.gd" id="1_ecnis"]
+[ext_resource type="PackedScene" uid="uid://clv0rat1xmide" path="res://entities/collector/collector.tscn" id="2_6g616"]
 
 [node name="DummyScene" type="Node2D"]
+script = ExtResource("1_ecnis")
 
-[node name="PauseMenu" parent="." instance=ExtResource("1_5eebt")]
-visible = false
-offset_right = 320.0
-offset_bottom = 180.0
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -449.0
+offset_top = -227.0
+offset_right = 750.0
+offset_bottom = 443.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
 
-[node name="StateMachineExample" parent="." instance=ExtResource("2_6vqfn")]
-position = Vector2(298, 22)
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(160, 90)
 
-[node name="PlatformerHeroExample" parent="." instance=ExtResource("3_d5efm")]
-position = Vector2(162, 89)
+[node name="Collector" parent="." instance=ExtResource("2_6g616")]
+position = Vector2(42, 89)
 
-[node name="Floor" type="StaticBody2D" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
-position = Vector2(162, 126)
-shape = SubResource("RectangleShape2D_b3pvx")
+[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("1_5eebt")]

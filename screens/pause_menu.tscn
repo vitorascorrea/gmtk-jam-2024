@@ -45,6 +45,7 @@ text = "Paused"
 horizontal_alignment = 1
 
 [node name="BackToMenuButton" type="Button" parent="VBoxContainer"]
+process_mode = 3
 layout_mode = 2
 theme_override_font_sizes/font_size = 10
 text = "Back to Menu"
