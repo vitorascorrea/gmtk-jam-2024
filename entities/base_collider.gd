@@ -61,6 +61,10 @@ func collect(collider: BaseCollider) -> void:
 
 
 func destroy():
+	var explosion = $Explosion
+	if is_instance_valid(explosion):
+		explosion.reparent(get_tree().root)
+		explosion.emitting = true
 	queue_free()
 
 

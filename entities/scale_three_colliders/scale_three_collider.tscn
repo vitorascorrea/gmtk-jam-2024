@@ -1,10 +1,20 @@
-[gd_scene load_steps=4 format=3 uid="uid://ca73u4rboqlrk"]
+[gd_scene load_steps=5 format=3 uid="uid://ca73u4rboqlrk"]
 
 [ext_resource type="Script" path="res://entities/scale_three_colliders/scale_three_collider.gd" id="1_l28l4"]
 [ext_resource type="Texture2D" uid="uid://bl7gmjb6n7qks" path="res://assets/colliders.png" id="1_nvjsb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pydq4"]
 size = Vector2(16, 16)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wi0wm"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 14.66
+gravity = Vector3(0, 0, 0)
+radial_accel_min = 29.03
+radial_accel_max = 58.6
+scale_min = 3.0
+scale_max = 3.0
 
 [node name="ScaleThreeCollider" type="Area2D"]
 script = ExtResource("1_l28l4")
@@ -20,3 +30,10 @@ shape = SubResource("RectangleShape2D_pydq4")
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 position = Vector2(4.17233e-07, 0)
 scale = Vector2(0.8, 0.8)
+
+[node name="Explosion" type="GPUParticles2D" parent="."]
+emitting = false
+process_material = SubResource("ParticleProcessMaterial_wi0wm")
+one_shot = true
+speed_scale = 2.0
+explosiveness = 1.0

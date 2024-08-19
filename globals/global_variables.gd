@@ -7,13 +7,13 @@ var music_volume = 1
 var sfx_volume = 1
 
 # Game constants
-const CHILD_COUNT_GOAL = 500
+const CHILD_COUNT_GOAL = 400
 const MAX_SCALE = 4
 const CHILD_COUNT_SCALES = {
 	1: 1,
 	2: 50,
 	3: 150,
-	4: 300,
+	4: 250,
 	5: 9999
 }
 

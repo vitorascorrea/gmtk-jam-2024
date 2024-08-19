@@ -1,10 +1,20 @@
-[gd_scene load_steps=4 format=3 uid="uid://4n5vlepk6r1q"]
+[gd_scene load_steps=5 format=3 uid="uid://4n5vlepk6r1q"]
 
 [ext_resource type="Script" path="res://entities/scale_five_colliders/scale_five_collider.gd" id="1_87avi"]
 [ext_resource type="Texture2D" uid="uid://bhb7bd5oyyvog" path="res://assets/black_hole.png" id="2_pnw8d"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cf4se"]
 radius = 29.0689
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_py5hi"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 14.66
+gravity = Vector3(0, 0, 0)
+radial_accel_min = 29.03
+radial_accel_max = 58.6
+scale_min = 8.0
+scale_max = 8.0
 
 [node name="ScaleFiveCollider" type="Area2D"]
 script = ExtResource("1_87avi")
@@ -19,3 +29,10 @@ shape = SubResource("CircleShape2D_cf4se")
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 position = Vector2(-1.5, -2)
 scale = Vector2(2.55, 1.4)
+
+[node name="Explosion" type="GPUParticles2D" parent="."]
+emitting = false
+process_material = SubResource("ParticleProcessMaterial_py5hi")
+one_shot = true
+speed_scale = 2.0
+explosiveness = 1.0

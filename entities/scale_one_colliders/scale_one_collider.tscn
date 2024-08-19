@@ -1,10 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://bfcy3187c3vdi"]
+[gd_scene load_steps=5 format=3 uid="uid://bfcy3187c3vdi"]
 
 [ext_resource type="Script" path="res://entities/scale_one_colliders/scale_one_collider.gd" id="1_sjxqk"]
 [ext_resource type="Texture2D" uid="uid://bl7gmjb6n7qks" path="res://assets/colliders.png" id="2_52yia"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q3o1x"]
 size = Vector2(4, 4)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_mphci"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 14.66
+gravity = Vector3(0, 0, 0)
+radial_accel_min = 29.03
+radial_accel_max = 58.6
 
 [node name="ScaleOneCollider" type="Area2D"]
 script = ExtResource("1_sjxqk")
@@ -20,3 +28,10 @@ shape = SubResource("RectangleShape2D_q3o1x")
 texture = ExtResource("2_52yia")
 hframes = 32
 vframes = 32
+
+[node name="Explosion" type="GPUParticles2D" parent="."]
+emitting = false
+process_material = SubResource("ParticleProcessMaterial_mphci")
+one_shot = true
+speed_scale = 2.0
+explosiveness = 1.0

@@ -72,16 +72,14 @@ func _on_child_counted():
 
 func play_child_counter_audio_effect(difference: int):
 	if difference > 0 and not $ConnectAudioPlayer.playing:
+		$ConnectAudioPlayer.pitch_scale = randf_range(0.5, 0.9)
 		$ConnectAudioPlayer.play()
 		
 	if difference < 0:
 		$ExplosionAudioPlayer.play()
 
 
-func update_scale():
-	if GlobalVariables.current_scale == GlobalVariables.MAX_SCALE:
-		return
-	
+func update_scale():	
 	for count_scale in GlobalVariables.CHILD_COUNT_SCALES:
 		var required_child_count = GlobalVariables.CHILD_COUNT_SCALES[count_scale]
 		
