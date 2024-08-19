@@ -5,6 +5,7 @@ var is_core: bool = false
 
 func setup():
 	screen_notifier = $VisibleOnScreenNotifier2D
+	damage = 1
 
 
 func set_as_core():

@@ -9,8 +9,11 @@ func create_collider(damaging_ratio: float = 0.05) -> BaseCollider:
 	if current_scale > 1 and randf() <= previous_scale_ratio:
 		return create_collider_with_type(GlobalVariables.SCENES_PER_SCALES[current_scale - 1])
 	
-	if current_scale < GlobalVariables.MAX_SCALE and randf() <= damaging_ratio:
-		return create_collider_with_type(GlobalVariables.SCENES_PER_SCALES[current_scale + 1])
+	if randf() <= damaging_ratio:
+		if current_scale < GlobalVariables.MAX_SCALE:
+			return create_collider_with_type(GlobalVariables.SCENES_PER_SCALES[current_scale + 1])
+		else:
+			return create_collider_with_type(GlobalVariables.SCENES_PER_SCALES[GlobalVariables.MAX_SCALE + 1])
 			
 	return create_collider_with_type(GlobalVariables.SCENES_PER_SCALES[current_scale])
 

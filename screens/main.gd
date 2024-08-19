@@ -27,7 +27,7 @@ func _ready() -> void:
 
 
 func _on_pixel_spawn_timer_timeout():
-	for i in range(pow(2, current_scale)):
+	for i in range(2 * current_scale):
 		var damaging_ration = 0.1 / float(current_scale)
 		var collider = collider_factory.create_collider(damaging_ration)
 		var x_zoom_ratio = 1.0 / float($Camera2D.zoom.x)
@@ -58,7 +58,6 @@ func _on_child_counted():
 	var different = GlobalVariables.current_child_count != last_child_count
 	var difference = GlobalVariables.current_child_count - last_child_count
 	last_child_count = GlobalVariables.current_child_count
-	update_child_counter()
 	
 	if GlobalVariables.current_child_count >= GlobalVariables.CHILD_COUNT_GOAL:
 		$CanvasLayer/PauseMenu.set_label_message("You win!")
@@ -77,11 +76,6 @@ func play_child_counter_audio_effect(difference: int):
 		
 	if difference < 0:
 		$ExplosionAudioPlayer.play()
-
-
-
-func update_child_counter():
-	$CanvasLayer/HBoxContainer/ChildCountLabel.text = str(GlobalVariables.current_child_count) + "/" + str(GlobalVariables.CHILD_COUNT_GOAL)
 
 
 func update_scale():
@@ -113,5 +107,4 @@ func change_scale(new_scale: int):
 		camera_zoom = float($Camera2D.zoom.x) * 2.0
 	
 	var tween = get_tree().create_tween()
-	tween.tween_property($Camera2D, "zoom", Vector2(camera_zoom, camera_zoom), 3)
-	await tween.finished
+	tween.tween_property($Camera2D, "zoom", Vector2(camera_zoom, camera_zoom), 2)

@@ -7,13 +7,14 @@ var music_volume = 1
 var sfx_volume = 1
 
 # Game constants
-const CHILD_COUNT_GOAL = 300
+const CHILD_COUNT_GOAL = 500
 const MAX_SCALE = 4
 const CHILD_COUNT_SCALES = {
 	1: 1,
 	2: 50,
-	3: 100,
-	4: 200,
+	3: 150,
+	4: 300,
+	5: 9999
 }
 
 const SCENES_PER_SCALES = {
@@ -21,6 +22,7 @@ const SCENES_PER_SCALES = {
 	2: preload("res://entities/scale_two_colliders/scale_two_collider.tscn"),
 	3: preload("res://entities/scale_three_colliders/scale_three_collider.tscn"),
 	4: preload("res://entities/scale_four_colliders/scale_four_collider.tscn"),
+	5: preload("res://entities/scale_five_colliders/scale_five_collider.tscn"),
 }
 
 # Game variables

@@ -8,6 +8,8 @@ var child_count: int = 0
 var grabbable: bool = true
 var last_scale_checked: int = -1
 var rotation_direction = [-1, 1].pick_random()
+var hit_points: int = 3
+var damage: int = 1
 
 func setup():
 	pass
@@ -52,10 +54,14 @@ func set_owned():
 
 func collect(collider: BaseCollider) -> void:
 	collider.set_owned()
-	collider.reparent(self)
+	collider.call_deferred("reparent", self)
 	
 	child_count += 1
 	GlobalVariables.current_child_count += 1
+
+
+func destroy():
+	queue_free()
 
 
 func _on_screen_notifier_screen_exited() -> void:
@@ -69,7 +75,11 @@ func _on_area_entered(area: Area2D) -> void:
 	
 	# Stray collider that can break owned colliders
 	if not owned and area.owned and GlobalVariables.current_child_count < min_size:
-		area.queue_free()
+		area.destroy()
+		hit_points -= area.damage
+		
+		if hit_points <= 0:
+			destroy()
 	
 	# Owned collider checking if can claim collider
 	elif owned and not area.owned and area.grabbable and GlobalVariables.current_child_count >= area.min_size:
@@ -77,7 +87,7 @@ func _on_area_entered(area: Area2D) -> void:
 	
 	# Owned collider checking if it can destroy collider
 	elif owned and not area.owned and not area.grabbable and GlobalVariables.current_child_count >= area.min_size:
-		area.queue_free()
+		area.destroy()
 
 
 func update_highlight():

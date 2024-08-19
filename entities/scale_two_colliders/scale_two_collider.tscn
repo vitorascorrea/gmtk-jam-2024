@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q3o1x"]
 size = Vector2(8, 8)
 
-[node name="ScaleTwoCollider" type="Area2D"]
+[node name="ScaleTwoCollider" type="Area2D" groups=["owned_gun_colliders"]]
 script = ExtResource("1_nann4")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]

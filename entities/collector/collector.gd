@@ -16,7 +16,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	var mouse_global_position = get_global_mouse_position()
 	global_position = Vector2(mouse_global_position.x - 2, mouse_global_position.y - 2)
-	
+		
 	if Input.is_action_pressed("rotate_left"):
 		rotation_degrees -= 2.5
 	if Input.is_action_pressed("rotate_right"):

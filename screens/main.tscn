@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dbjbvg5qkdwa3"]
+[gd_scene load_steps=13 format=3 uid="uid://dbjbvg5qkdwa3"]
 
 [ext_resource type="Script" path="res://screens/main.gd" id="1_3p2y8"]
 [ext_resource type="PackedScene" uid="uid://clv0rat1xmide" path="res://entities/collector/collector.tscn" id="2_e64us"]
@@ -7,6 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://dj5h0o2e6flgd" path="res://assets/explosion.wav" id="4_hlnwo"]
 [ext_resource type="AudioStream" uid="uid://bn575gn3mu4pe" path="res://assets/connect_sound_1.wav" id="5_2sas3"]
 [ext_resource type="AudioStream" uid="uid://biql35w1f87hi" path="res://assets/432171__last_point__space-adventure.mp3" id="6_h3uwv"]
+[ext_resource type="PackedScene" uid="uid://d3q0enf4paidh" path="res://entities/science_gauge/science_gauge.tscn" id="7_jf3x3"]
 [ext_resource type="Shader" path="res://helpers/nebula.gdshader" id="7_xnwr5"]
 [ext_resource type="Script" path="res://helpers/audio_with_globals.gd" id="8_tr652"]
 [ext_resource type="Texture2D" uid="uid://g6hoatrrdpg6" path="res://icon.svg" id="8_wvnss"]
@@ -50,12 +51,8 @@ position = Vector2(80, 45)
 [node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("3_aw215")]
 metadata/_edit_lock_ = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer"]
-offset_right = 58.0
-offset_bottom = 20.0
-
-[node name="ChildCountLabel" type="Label" parent="CanvasLayer/HBoxContainer"]
-layout_mode = 2
+[node name="ScienceGauge" parent="CanvasLayer" instance=ExtResource("7_jf3x3")]
+position = Vector2(48, 13)
 
 [node name="ConnectAudioPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_2sas3")
