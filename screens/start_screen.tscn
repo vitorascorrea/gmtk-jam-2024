@@ -1,6 +1,29 @@
-[gd_scene load_steps=2 format=3 uid="uid://blqkbx34150j1"]
+[gd_scene load_steps=8 format=3 uid="uid://blqkbx34150j1"]
 
 [ext_resource type="Script" path="res://screens/start_screen.gd" id="1_n2a3l"]
+[ext_resource type="Shader" path="res://helpers/nebula.gdshader" id="2_olrnm"]
+[ext_resource type="Texture2D" uid="uid://dk2x4r1k840gj" path="res://assets/noise_texture.jpg" id="3_4wuu4"]
+[ext_resource type="Texture2D" uid="uid://g6hoatrrdpg6" path="res://icon.svg" id="4_r0a78"]
+[ext_resource type="AudioStream" uid="uid://biql35w1f87hi" path="res://assets/432171__last_point__space-adventure.mp3" id="5_fd0dv"]
+[ext_resource type="Script" path="res://helpers/audio_with_globals.gd" id="6_fjw8r"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wfpqu"]
+shader = ExtResource("2_olrnm")
+shader_parameter/stars_on = true
+shader_parameter/timeScaleFactor = 0.01
+shader_parameter/colour_muiltiplier = Color(0.493226, 0.171611, 0.434305, 1)
+shader_parameter/colour_muiltiplier2 = Color(0.525329, 0.250638, 0.813558, 1)
+shader_parameter/brightness = 2.3
+shader_parameter/clouds_resolution = 0.81
+shader_parameter/clouds_intesity = 0.0
+shader_parameter/waveyness = 3.42
+shader_parameter/fragmentation = 7.0
+shader_parameter/distortion = 0.5
+shader_parameter/clouds_alpha = 0.6
+shader_parameter/movement = 1.0
+shader_parameter/blur = 1.4
+shader_parameter/blur2 = 0.00989
+shader_parameter/noise_texture = ExtResource("3_4wuu4")
 
 [node name="StartScreen" type="Control"]
 layout_mode = 3
@@ -10,6 +33,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_n2a3l")
+
+[node name="Nebula" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_wfpqu")
+position = Vector2(235, 139)
+scale = Vector2(10.4102, 10.6016)
+texture = ExtResource("4_r0a78")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -28,7 +57,8 @@ grow_vertical = 2
 [node name="Label" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
-text = "Title"
+text = "Space station 
+assemble"
 horizontal_alignment = 1
 
 [node name="StartButton" type="Button" parent="VBoxContainer"]
@@ -37,4 +67,16 @@ layout_mode = 2
 size_flags_horizontal = 4
 text = "Start"
 
+[node name="OptionsButton" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Options"
+
+[node name="MusicAudioPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_fd0dv")
+autoplay = true
+script = ExtResource("6_fjw8r")
+
 [connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/OptionsButton" to="." method="_on_options_button_pressed"]

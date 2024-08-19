@@ -1,0 +1,115 @@
+[gd_scene load_steps=8 format=3 uid="uid://cb7r8uaolgfaq"]
+
+[ext_resource type="Script" path="res://screens/options.gd" id="1_3ha62"]
+[ext_resource type="Shader" path="res://helpers/nebula.gdshader" id="1_ybony"]
+[ext_resource type="Texture2D" uid="uid://dk2x4r1k840gj" path="res://assets/noise_texture.jpg" id="2_w83ut"]
+[ext_resource type="Texture2D" uid="uid://g6hoatrrdpg6" path="res://icon.svg" id="3_uy2ka"]
+[ext_resource type="AudioStream" uid="uid://biql35w1f87hi" path="res://assets/432171__last_point__space-adventure.mp3" id="5_draxq"]
+[ext_resource type="Script" path="res://helpers/audio_with_globals.gd" id="6_asogf"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xtsvx"]
+shader = ExtResource("1_ybony")
+shader_parameter/stars_on = true
+shader_parameter/timeScaleFactor = 0.01
+shader_parameter/colour_muiltiplier = Color(0.493226, 0.171611, 0.434305, 1)
+shader_parameter/colour_muiltiplier2 = Color(0.525329, 0.250638, 0.813558, 1)
+shader_parameter/brightness = 2.3
+shader_parameter/clouds_resolution = 0.81
+shader_parameter/clouds_intesity = 0.0
+shader_parameter/waveyness = 3.42
+shader_parameter/fragmentation = 7.0
+shader_parameter/distortion = 0.5
+shader_parameter/clouds_alpha = 0.6
+shader_parameter/movement = 1.0
+shader_parameter/blur = 1.4
+shader_parameter/blur2 = 0.00989
+shader_parameter/noise_texture = ExtResource("2_w83ut")
+
+[node name="Options" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3ha62")
+
+[node name="Nebula" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_xtsvx")
+position = Vector2(235, 139)
+scale = Vector2(10.4102, 10.6016)
+texture = ExtResource("3_uy2ka")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Options"
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 20
+
+[node name="MusicContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Music" type="Label" parent="MarginContainer/VBoxContainer/MusicContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Music"
+
+[node name="HSlider" type="HSlider" parent="MarginContainer/VBoxContainer/MusicContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+max_value = 1.0
+step = 0.1
+value = 1.0
+
+[node name="SFXContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="SFX" type="Label" parent="MarginContainer/VBoxContainer/SFXContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "SFX"
+
+[node name="HSlider" type="HSlider" parent="MarginContainer/VBoxContainer/SFXContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+max_value = 1.0
+step = 0.1
+value = 1.0
+
+[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 20
+
+[node name="BackButton" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Back to menu"
+
+[node name="MusicAudioPlayer" type="AudioStreamPlayer2D" parent="."]
+process_mode = 3
+stream = ExtResource("5_draxq")
+autoplay = true
+script = ExtResource("6_asogf")
+
+[connection signal="drag_ended" from="MarginContainer/VBoxContainer/MusicContainer/HSlider" to="." method="_on_music_slider_drag_ended"]
+[connection signal="drag_ended" from="MarginContainer/VBoxContainer/SFXContainer/HSlider" to="." method="_on_sfx_slider_drag_ended"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]

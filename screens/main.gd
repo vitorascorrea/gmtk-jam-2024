@@ -4,6 +4,7 @@ var collider_factory = ColliderFactory.new()
 var pixel_spawn_timer = Timer.new()
 var child_counter_timer = Timer.new()
 
+var last_child_count: int = 1
 var current_scale: int = 1
 const base_screen_dimensions: Vector2 = Vector2(320, 180)
 
@@ -21,35 +22,69 @@ func _ready() -> void:
 	add_child(pixel_spawn_timer)
 	
 	$Collector.connect("initial_destroyed", _on_collector_initial_destroyed)
+	
+	GlobalVariables.reset()
 
 
 func _on_pixel_spawn_timer_timeout():
 	for i in range(pow(2, current_scale)):
-		var collider = collider_factory.create_collider()
+		var damaging_ration = 0.1 / float(current_scale)
+		var collider = collider_factory.create_collider(damaging_ration)
 		var x_zoom_ratio = 1.0 / float($Camera2D.zoom.x)
 		var y_zoom_ratio = 1.0 / float($Camera2D.zoom.y)
 		var x_position = base_screen_dimensions.x * x_zoom_ratio
+		var y_position = randi_range(
+			-(base_screen_dimensions.y * y_zoom_ratio),
+			(base_screen_dimensions.y * y_zoom_ratio)
+		)
 		
 		collider.position = Vector2(
 			x_position, 
-			randi_range(
-				-(base_screen_dimensions.y * y_zoom_ratio),
-				(base_screen_dimensions.y * y_zoom_ratio)
-			)
+			y_position
 		)
 		
 		add_child(collider)
 
 
 func _on_collector_initial_destroyed():
+	$ExplosionAudioPlayer.play()
+	await $ExplosionAudioPlayer.finished
 	$CanvasLayer/PauseMenu.set_label_message("Game over")
 	$CanvasLayer/PauseMenu.trigger()
 	return
 
 
 func _on_child_counted():
-	$CanvasLayer/Label.text = str(GlobalVariables.current_child_count)
+	var different = GlobalVariables.current_child_count != last_child_count
+	var difference = GlobalVariables.current_child_count - last_child_count
+	last_child_count = GlobalVariables.current_child_count
+	update_child_counter()
 	
+	if GlobalVariables.current_child_count >= GlobalVariables.CHILD_COUNT_GOAL:
+		$CanvasLayer/PauseMenu.set_label_message("You win!")
+		$CanvasLayer/PauseMenu.trigger()
+		return
+	
+	if different:
+		play_child_counter_audio_effect(difference)
+	
+	update_scale()
+
+
+func play_child_counter_audio_effect(difference: int):
+	if difference > 0 and not $ConnectAudioPlayer.playing:
+		$ConnectAudioPlayer.play()
+		
+	if difference < 0:
+		$ExplosionAudioPlayer.play()
+
+
+
+func update_child_counter():
+	$CanvasLayer/HBoxContainer/ChildCountLabel.text = str(GlobalVariables.current_child_count) + "/" + str(GlobalVariables.CHILD_COUNT_GOAL)
+
+
+func update_scale():
 	if GlobalVariables.current_scale == GlobalVariables.MAX_SCALE:
 		return
 	

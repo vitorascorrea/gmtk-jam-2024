@@ -3,18 +3,18 @@
 [ext_resource type="Script" path="res://entities/scale_four_colliders/scale_four_collider.gd" id="1_l836k"]
 [ext_resource type="Texture2D" uid="uid://bl7gmjb6n7qks" path="res://assets/colliders.png" id="2_5udi0"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_h2jhg"]
-size = Vector2(32, 32)
+[sub_resource type="CircleShape2D" id="CircleShape2D_3sya3"]
+radius = 17.0
 
 [node name="ScaleFourCollider" type="Area2D"]
 script = ExtResource("1_l836k")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
-position = Vector2(1.43051e-06, -2.38419e-07)
-scale = Vector2(1.6, 1.6)
+position = Vector2(0.500001, 0)
+scale = Vector2(1.05, 1.2)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_h2jhg")
+shape = SubResource("CircleShape2D_3sya3")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_5udi0")

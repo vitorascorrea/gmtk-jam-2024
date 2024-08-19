@@ -13,3 +13,7 @@ func _process(delta: float) -> void:
 
 func _on_button_pressed() -> void:
 	SceneTransition.transition_to("res://screens/main.tscn")
+
+
+func _on_options_button_pressed() -> void:
+	SceneTransition.transition_to("res://screens/options.tscn")

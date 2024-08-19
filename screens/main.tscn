@@ -1,36 +1,74 @@
-[gd_scene load_steps=4 format=3 uid="uid://dbjbvg5qkdwa3"]
+[gd_scene load_steps=12 format=3 uid="uid://dbjbvg5qkdwa3"]
 
 [ext_resource type="Script" path="res://screens/main.gd" id="1_3p2y8"]
 [ext_resource type="PackedScene" uid="uid://clv0rat1xmide" path="res://entities/collector/collector.tscn" id="2_e64us"]
 [ext_resource type="PackedScene" uid="uid://dlbme2uvym6ce" path="res://screens/pause_menu.tscn" id="3_aw215"]
+[ext_resource type="Texture2D" uid="uid://dk2x4r1k840gj" path="res://assets/noise_texture.jpg" id="3_gq5vm"]
+[ext_resource type="AudioStream" uid="uid://dj5h0o2e6flgd" path="res://assets/explosion.wav" id="4_hlnwo"]
+[ext_resource type="AudioStream" uid="uid://bn575gn3mu4pe" path="res://assets/connect_sound_1.wav" id="5_2sas3"]
+[ext_resource type="AudioStream" uid="uid://biql35w1f87hi" path="res://assets/432171__last_point__space-adventure.mp3" id="6_h3uwv"]
+[ext_resource type="Shader" path="res://helpers/nebula.gdshader" id="7_xnwr5"]
+[ext_resource type="Script" path="res://helpers/audio_with_globals.gd" id="8_tr652"]
+[ext_resource type="Texture2D" uid="uid://g6hoatrrdpg6" path="res://icon.svg" id="8_wvnss"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d1kxw"]
+shader = ExtResource("7_xnwr5")
+shader_parameter/stars_on = true
+shader_parameter/timeScaleFactor = 0.01
+shader_parameter/colour_muiltiplier = Color(0.493226, 0.171611, 0.434305, 1)
+shader_parameter/colour_muiltiplier2 = Color(0.525329, 0.250638, 0.813558, 1)
+shader_parameter/brightness = 2.3
+shader_parameter/clouds_resolution = 0.81
+shader_parameter/clouds_intesity = 0.0
+shader_parameter/waveyness = 3.42
+shader_parameter/fragmentation = 7.0
+shader_parameter/distortion = 0.5
+shader_parameter/clouds_alpha = 0.6
+shader_parameter/movement = 1.0
+shader_parameter/blur = 1.4
+shader_parameter/blur2 = 0.00989
+shader_parameter/noise_texture = ExtResource("3_gq5vm")
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_3p2y8")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -449.0
-offset_top = -227.0
-offset_right = 750.0
-offset_bottom = 443.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 1)
+[node name="Nebula" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_d1kxw")
+position = Vector2(235, 139)
+scale = Vector2(10.4102, 10.6016)
+texture = ExtResource("8_wvnss")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(80, 45)
 zoom = Vector2(2, 2)
 
 [node name="Collector" parent="." instance=ExtResource("2_e64us")]
-position = Vector2(42, 89)
+position = Vector2(80, 45)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Label" type="Label" parent="CanvasLayer"]
-offset_right = 40.0
-offset_bottom = 23.0
-
 [node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("3_aw215")]
+metadata/_edit_lock_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer"]
+offset_right = 58.0
+offset_bottom = 20.0
+
+[node name="ChildCountLabel" type="Label" parent="CanvasLayer/HBoxContainer"]
+layout_mode = 2
+
+[node name="ConnectAudioPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_2sas3")
+pitch_scale = 0.7
+script = ExtResource("8_tr652")
+type = 1
+
+[node name="ExplosionAudioPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_hlnwo")
+script = ExtResource("8_tr652")
+type = 1
+
+[node name="MusicAudioPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_h3uwv")
+autoplay = true
+script = ExtResource("8_tr652")
