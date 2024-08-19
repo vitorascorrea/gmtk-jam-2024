@@ -1,0 +1,71 @@
+[gd_scene load_steps=6 format=3 uid="uid://cq8cgrruqjvl7"]
+
+[ext_resource type="Shader" path="res://helpers/nebula.gdshader" id="1_krfwv"]
+[ext_resource type="Script" path="res://screens/victory.gd" id="1_sdl3y"]
+[ext_resource type="Texture2D" uid="uid://dk2x4r1k840gj" path="res://assets/noise_texture.jpg" id="2_yj0v5"]
+[ext_resource type="Texture2D" uid="uid://g6hoatrrdpg6" path="res://icon.svg" id="3_2qatn"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fqjhk"]
+shader = ExtResource("1_krfwv")
+shader_parameter/stars_on = true
+shader_parameter/timeScaleFactor = 0.01
+shader_parameter/colour_muiltiplier = Color(0.493226, 0.171611, 0.434305, 1)
+shader_parameter/colour_muiltiplier2 = Color(0.525329, 0.250638, 0.813558, 1)
+shader_parameter/brightness = 2.3
+shader_parameter/clouds_resolution = 0.81
+shader_parameter/clouds_intesity = 0.0
+shader_parameter/waveyness = 3.42
+shader_parameter/fragmentation = 7.0
+shader_parameter/distortion = 0.5
+shader_parameter/clouds_alpha = 0.6
+shader_parameter/movement = 1.0
+shader_parameter/blur = 1.4
+shader_parameter/blur2 = 0.00989
+shader_parameter/noise_texture = ExtResource("2_yj0v5")
+
+[node name="Victory" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_sdl3y")
+
+[node name="Nebula" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_fqjhk")
+position = Vector2(294, 190)
+scale = Vector2(10.4102, 10.6016)
+texture = ExtResource("3_2qatn")
+
+[node name="Label" type="Label" parent="."]
+z_index = 2
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -111.5
+offset_right = 111.5
+offset_bottom = 43.0
+grow_horizontal = 2
+text = "You rebuilt
+the space station"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="."]
+z_index = 2
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -83.0
+offset_top = -48.0
+offset_right = 84.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Back to menu"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

@@ -1,4 +1,4 @@
-class_name SceneTransitionUI extends Control
+class_name SceneTransitionUI extends CanvasLayer
 
 
 func fade_out() -> Signal:

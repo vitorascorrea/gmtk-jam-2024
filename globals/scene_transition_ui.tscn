@@ -56,20 +56,13 @@ _data = {
 "fade_out": SubResource("Animation_tm322")
 }
 
-[node name="SceneTransitionUI" type="Control"]
+[node name="SceneTransitionUI" type="CanvasLayer"]
 process_mode = 3
-z_index = 2
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+layer = 3
 script = ExtResource("1_j5egu")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 z_index = 1
-layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dbjbvg5qkdwa3"]
+[gd_scene load_steps=14 format=3 uid="uid://dbjbvg5qkdwa3"]
 
 [ext_resource type="Script" path="res://screens/main.gd" id="1_3p2y8"]
 [ext_resource type="PackedScene" uid="uid://clv0rat1xmide" path="res://entities/collector/collector.tscn" id="2_e64us"]
@@ -11,6 +11,7 @@
 [ext_resource type="Shader" path="res://helpers/nebula.gdshader" id="7_xnwr5"]
 [ext_resource type="Script" path="res://helpers/audio_with_globals.gd" id="8_tr652"]
 [ext_resource type="Texture2D" uid="uid://g6hoatrrdpg6" path="res://icon.svg" id="8_wvnss"]
+[ext_resource type="Texture2D" uid="uid://byefkv45cxfsd" path="res://assets/tutorial.png" id="8_xqmax"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_d1kxw"]
 shader = ExtResource("7_xnwr5")
@@ -35,7 +36,7 @@ script = ExtResource("1_3p2y8")
 
 [node name="Nebula" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_d1kxw")
-position = Vector2(235, 139)
+position = Vector2(294, 190)
 scale = Vector2(10.4102, 10.6016)
 texture = ExtResource("8_wvnss")
 
@@ -52,7 +53,45 @@ position = Vector2(80, 45)
 metadata/_edit_lock_ = true
 
 [node name="ScienceGauge" parent="CanvasLayer" instance=ExtResource("7_jf3x3")]
+visible = false
 position = Vector2(48, 13)
+
+[node name="Tutorial" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Tutorial"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -103.5
+offset_top = -27.0
+offset_right = 103.5
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 10
+text = "Collect science apparatus
+Avoid red things
+Protect the core"
+horizontal_alignment = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/Tutorial"]
+position = Vector2(21, -16)
+texture = ExtResource("8_xqmax")
 
 [node name="ConnectAudioPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_2sas3")

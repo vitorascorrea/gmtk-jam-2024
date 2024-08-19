@@ -13,8 +13,7 @@ const CHILD_COUNT_SCALES = {
 	1: 1,
 	2: 50,
 	3: 150,
-	4: 250,
-	5: 9999
+	4: 250
 }
 
 const SCENES_PER_SCALES = {
