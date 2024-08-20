@@ -5,6 +5,7 @@ const START_SCREEN_SCENE = "res://screens/start_screen.tscn"
 const SCENE_TRANSITION_UI_SCENE = "res://globals/scene_transition_ui.tscn"
 var music_volume = 1
 var sfx_volume = 1
+var difficulty_level = 2
 
 # Game constants
 const CHILD_COUNT_GOAL = 400

@@ -5,7 +5,7 @@ func setup():
 	min_size = GlobalVariables.CHILD_COUNT_SCALES[4]
 	screen_notifier = $VisibleOnScreenNotifier2D
 	damage = 4
-	hit_points = 24
+	hit_points = 12 * GlobalVariables.difficulty_level
 
 func set_as_part():
 	super()

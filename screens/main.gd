@@ -39,12 +39,16 @@ func start_game():
 	$Collector.connect("initial_destroyed", _on_collector_initial_destroyed)	
 
 
-func _on_pixel_spawn_timer_timeout():
+func _on_pixel_spawn_timer_timeout():	
 	for i in range(2 * current_scale):
 		var damaging_ratio = 0.1 / float(current_scale)
 		
-		if current_scale == GlobalVariables.MAX_SCALE:
-			damaging_ratio = 0.075 / float(GlobalVariables.MAX_SCALE + 1)
+		if GlobalVariables.difficulty_level == 1:
+			damaging_ratio = 0.08 / float(current_scale)
+		elif GlobalVariables.difficulty_level == 2:
+			damaging_ratio = 0.1 / float(current_scale)
+		else:
+			damaging_ratio = 0.12 / float(current_scale)
 		
 		var collider = collider_factory.create_collider(damaging_ratio)
 		var x_zoom_ratio = 1.0 / float($Camera2D.zoom.x)

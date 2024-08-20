@@ -5,6 +5,7 @@ extends Control
 func _ready() -> void:
 	$MarginContainer/VBoxContainer/MusicContainer/HSlider.value = GlobalVariables.music_volume
 	$MarginContainer/VBoxContainer/SFXContainer/HSlider.value = GlobalVariables.sfx_volume
+	$MarginContainer/VBoxContainer/DifficultyContainer/HSlider.value = GlobalVariables.difficulty_level
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -24,3 +25,7 @@ func _on_music_slider_drag_ended(value_changed: bool) -> void:
 
 func _on_sfx_slider_drag_ended(value_changed: bool) -> void:
 	GlobalVariables.sfx_volume = $MarginContainer/VBoxContainer/SFXContainer/HSlider.value
+
+
+func _on_difficulty_drag_ended(value_changed: bool) -> void:
+	GlobalVariables.difficulty_level = $MarginContainer/VBoxContainer/DifficultyContainer/HSlider.value
